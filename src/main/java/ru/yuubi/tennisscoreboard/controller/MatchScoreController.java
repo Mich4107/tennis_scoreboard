@@ -2,6 +2,7 @@ package ru.yuubi.tennisscoreboard.controller;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -17,17 +18,20 @@ import java.util.List;
 import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
 
-@org.springframework.stereotype.Controller
+@Controller
 public class MatchScoreController {
     private static final int ITEMS_PER_PAGE = 6;
     private int UUID = 0;
 
     @Autowired
     private OngoingMatchesService ongoingMatchesService;
+
     @Autowired
     private MatchScoreCalculationService matchScoreCalculationService;
+
     @Autowired
     private PlayerService playerService;
+
     @Autowired
     private MatchService matchService;
 
@@ -66,12 +70,12 @@ public class MatchScoreController {
         model.addAttribute("uuid", uuid);
 
         if(matchScore.isDeuce()){
-            model.addAttribute("isDeuce", matchScore.isDeuce());
+            model.addAttribute("isDeuce", true);
             model.addAttribute("playerOneDeucePoints", matchScore.getPlayerOneDeucePoints());
             model.addAttribute("playerTwoDeucePoints", matchScore.getPlayerTwoDeucePoints());
         }
         if(matchScore.isTieBreak()){
-            model.addAttribute("isTieBreak", matchScore.isTieBreak());
+            model.addAttribute("isTieBreak", true);
             model.addAttribute("playerOneTieBreakPoints", matchScore.getPlayerOneTieBreakPoints());
             model.addAttribute("playerTwoTieBreakPoints", matchScore.getPlayerTwoTieBreakPoints());
         }

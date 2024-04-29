@@ -3,9 +3,6 @@ package ru.yuubi.tennisscoreboard.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import ru.yuubi.tennisscoreboard.dto.PlayerScoreDTO;
-
-import java.util.HashMap;
 
 @Data
 @Entity
