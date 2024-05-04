@@ -151,18 +151,25 @@ public class MatchScoreCalculationService {
         int playerOneGames = playersInfo.getPlayerOneGames();
         int playerTwoGames = playersInfo.getPlayerTwoGames();
 
+        int playerOneDeucePoints = matchScore.getPlayerOneDeucePoints();
+        int playerTwoDeucePoints = matchScore.getPlayerTwoDeucePoints();
+
         if (playerOneId == winPlayerId) {
-            int playerOneDeucePoints = matchScore.getPlayerOneDeucePoints();
+            if(playerTwoDeucePoints == 1) {
+                matchScore.setPlayerOneDeucePoints(0);
+                matchScore.setPlayerTwoDeucePoints(0);
+                return;
+            }
             playerOneDeucePoints++;
             matchScore.setPlayerOneDeucePoints(playerOneDeucePoints);
-
-            matchScore.setPlayerTwoDeucePoints(0);
         } else if (playerTwoId == winPlayerId) {
-            int playerTwoDeucePoints = matchScore.getPlayerTwoDeucePoints();
+            if(playerOneDeucePoints == 1) {
+                matchScore.setPlayerOneDeucePoints(0);
+                matchScore.setPlayerTwoDeucePoints(0);
+                return;
+            }
             playerTwoDeucePoints++;
             matchScore.setPlayerTwoDeucePoints(playerTwoDeucePoints);
-
-            matchScore.setPlayerOneDeucePoints(0);
         }
 
         if (matchScore.getPlayerOneDeucePoints() == 2) {
